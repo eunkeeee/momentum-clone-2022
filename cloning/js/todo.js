@@ -9,14 +9,18 @@ function saveToDos() {
   // localStorage에는 string만 저장 가능 => JSON.stringify를 통해 string으로 변환
   // 후에 parse를 통해 다시 array로 변환 가능함
 }
+
 function deleteToDo(event) {
   const li = event.target.parentElement;
   li.remove();
+  todos = todos.filter((todo) => todo.id !== parseInt(li.id));
+  saveToDos();
 }
 function paintToDo(newTodo) {
   const li = document.createElement("li");
+  li.id = newTodo.id;
   const span = document.createElement("span");
-  span.innerText = newTodo;
+  span.innerText = newTodo.text;
   const button = document.createElement("button");
   button.innerText = "X";
   // 여러 버튼 간에 어떤 버튼이 어떤 list를 가리키는지 구분하지 못함
@@ -30,8 +34,12 @@ function handleToDoSubmit() {
   event.preventDefault();
   const newTodo = todoInput.value;
   todoInput.value = "";
-  todos.push(newTodo);
-  paintToDo(newTodo);
+  const newTodoObj = {
+    text: newTodo,
+    id: Date.now(),
+  };
+  todos.push(newTodoObj);
+  paintToDo(newTodoObj);
   saveToDos();
 }
 

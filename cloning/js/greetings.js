@@ -10,6 +10,14 @@ function onLoginSubmit(event) {
   localStorage.setItem(USERNAME_KEY, loginInput.value);
   paintGreetings();
 }
+// let timeOfDay = "";
+// if (date.getHours() <= 11) {
+//   let timeOfDay = "Morning";
+// } else if (date.getHours() <= 17) {
+//   let timeOfDay = "Afternoon";
+// } else {
+//   let timeOfDay = "Night";
+// }
 
 function paintGreetings() {
   const username = localStorage.getItem(USERNAME_KEY);
